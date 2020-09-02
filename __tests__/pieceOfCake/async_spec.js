@@ -1,12 +1,12 @@
 describe('for asynchronous', () => {
-  it('should return immediately and later trigger the callback', (done) => {
+  fit('should return immediately and later trigger the callback', (done) => {
     const logs = [];
     setTimeout(() => {
       logs.push('async callback triggered');
 
       // <--start
       // Please write down the correct value. You should write the final result directly.
-      const expected = undefined;
+      const expected = ['after calling setTimeout', 'async callback triggered'];
       // --end->
 
       expect(logs).toEqual(expected);
@@ -15,7 +15,7 @@ describe('for asynchronous', () => {
     logs.push('after calling setTimeout');
   });
 
-  it('should return immediately and later trigger the callback using promise', (done) => {
+  fit('should return immediately and later trigger the callback using promise', (done) => {
     function setTimeoutUsingPromise(ms) {
       return new Promise(resolve => setTimeout(() => resolve(), ms));
     }
@@ -27,7 +27,7 @@ describe('for asynchronous', () => {
 
         // <--start
         // Please write down the correct value. You should write the final result directly.
-        const expected = undefined;
+        const expected = ['after calling setTimeout', 'async callback triggered'];
         // --end->
 
         expect(logs).toEqual(expected);
@@ -37,7 +37,7 @@ describe('for asynchronous', () => {
     logs.push('after calling setTimeout');
   });
 
-  it('should trigger failure using reject', (done) => {
+  fit('should trigger failure using reject', (done) => {
     function asyncOperationThatWillFail() {
       return new Promise((_, reject) => reject(new Error('>_<')));
     }
@@ -48,7 +48,7 @@ describe('for asynchronous', () => {
       .then(() => {
         // <--start
         // Please write down the correct value. You should write the final result directly.
-        const expected = undefined;
+        const expected = ['Failed! >_<'];
         // --end->
 
         expect(logs).toEqual(expected);
@@ -56,7 +56,7 @@ describe('for asynchronous', () => {
       });
   });
 
-  it('should trigger failure using reject and handle using catch', (done) => {
+  fit('should trigger failure using reject and handle using catch', (done) => {
     function asyncOperationThatWillFail() {
       return new Promise((_, reject) => reject(new Error('>_<')));
     }
@@ -68,7 +68,7 @@ describe('for asynchronous', () => {
       .then(() => {
         // <--start
         // Please write down the correct value. You should write the final result directly.
-        const expected = undefined;
+        const expected = ['Caught! >_<'];
         // --end->
 
         expect(logs).toEqual(expected);
@@ -76,7 +76,7 @@ describe('for asynchronous', () => {
       });
   });
 
-  it('should propagate the error as the way of the sync code', (done) => {
+  fit('should propagate the error as the way of the sync code', (done) => {
     function asyncOperationThatWillFail() {
       return new Promise((_, reject) => reject(new Error('>_<')));
     }
@@ -93,7 +93,7 @@ describe('for asynchronous', () => {
       .then(() => {
         // <--start
         // Please write down the correct value. You should write the final result directly.
-        const expected = undefined;
+        const expected = ['Caught! >_<', 'Continued', 'Another continued', 'Error handled: Holy ~'];
         // --end->
         expect(logs).toEqual(expected);
         done();
